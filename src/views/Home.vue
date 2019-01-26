@@ -1,18 +1,15 @@
 <template lang="pug">
-  section.s-default
-    .container
-      h1.s-default__title._centered My Music
-      .s-default__content
-        t-default(
-        :format="playListFormat",
-        :dataList="GET_PLAYLIST")
+  s-default(:title="'My Music'")
+    t-default(
+    :format="playListFormat",
+    :dataList="GET_PLAYLIST")
 
 </template>
 
 <script>
   import { mapActions, mapGetters } from "vuex"
   import sDefault from "@/components/sections/s-default.vue"
-  import tDefault from "../components/tables/t-default.vue";
+  import tDefault from "@/components/tables/t-default.vue";
 
   export default {
     name: "home",
@@ -57,14 +54,3 @@
     }
   };
 </script>
-
-
-<style lang="stylus">
-  .s-default
-    padding 50px 0
-    &__title
-      margin-bottom 50px
-    &__content
-      max-width 800px
-      margin 0 auto
-</style>
