@@ -2,7 +2,8 @@
   section.s-default
     .container
       h1.s-default__title._centered {{ title }}
-      slot
+      .s-default__content
+        slot
 
 </template>
 
