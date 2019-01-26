@@ -20,6 +20,9 @@
             @blur="onFieldBlur",
             v-model.trim="comment",
             :key="detailsData.name")
+          .b-details__share(v-show="comment")
+            p
+              a.b-details__share-twitter(:href="setTweetShareParams", target="_blank") Tweet
 </template>
 
 <script>
@@ -35,11 +38,6 @@
       detailsData: {
         type: Object,
         required: true
-      }
-    },
-    computed: {
-      getImage() {
-        return this.detailsData.name ? `https://ui-avatars.com/api/?name=${this.detailsData.artist}&size=300` : "http://placehold.it/300x300";
       }
     },
     created() {
@@ -60,6 +58,14 @@
       },
       updateCommentIfNeed(data) {
         this.comment = !data.comment ? '' : data.comment;
+      }
+    },
+    computed: {
+      getImage() {
+        return this.detailsData.name ? `https://ui-avatars.com/api/?name=${this.detailsData.artist}&size=300` : "http://placehold.it/300x300";
+      },
+      setTweetShareParams() {
+        return `https://twitter.com/intent/tweet?text=${this.comment.replace(/ /g, '%20')}`;
       }
     },
     watch: {
@@ -105,4 +111,6 @@
         border 1px solid $border-color-dark
         padding 20px
         font-size $font-size-large-desktop
+    &__share
+      margin-top 20px
 </style>
