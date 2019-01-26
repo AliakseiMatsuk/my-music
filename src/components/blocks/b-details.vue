@@ -28,7 +28,7 @@
     data() {
       return {
         comment: "",
-        autoSaveTimer: null,
+        autoSaveTimer: null
       }
     },
     props: {
@@ -68,7 +68,7 @@
           this.updateCommentIfNeed(data);
         },
         deep: true
-      },
+      }
     }
   }
 </script>
