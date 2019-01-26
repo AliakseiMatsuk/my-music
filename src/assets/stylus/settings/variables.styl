@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+
+defaultFontFamily()
+  font-family $default-font, Arial, Helvetica, sans-serif
+
+setFontColor()
+  &._warning
+    color $text-color-warning
+  &._base
+    color $text-color-base
+  &._success
+    color $text-color-success
+
+/**
+*Font family
+*/
+$default-font = 'Lato'
+
+/**
+*Wrapper size
+*/
+$wrapper-max-width = 144rem + 3rem
+$wrapper-min-width = 32rem
+
+/**
+ *Colors
+ */
+
+
+//Primary
+$gul = #DCAE1D
+$green = #7dce94
+$black = #0D262E
+$white = #FFFFFF
+
+//Grays
+$darkGray = #3d3d3f
+$gray = #f6f5f3
+$lightGray = #f9f8fd
+
+//Warning
+$alert = #FC4A1A
+
+/**
+ *Colors Variables
+ */
+$defaultLinkColor = $gul
+
+$primary = $gul
+$dark = $black
+
+$base = $darkGray
+$light = $gray
+$lighter = $lightGray
+
+$warning = $alert
+$success = $green
+
+//text colors
+$text-color-base = $base
+$text-color-dark = $dark
+$text-color-light = $light
+$text-color-lighter = $lighter
+$text-color-warning = $warning
+$text-color-success = $success
+$text-color-primary = $primary
+$text-color-lightest = $white
+
+//background colors
+$bg-color-primary = $primary
+$bg-color-dark = $dark
+$bg-color-base = $base
+$bg-color-light = $light
+$bg-color-lighter = $lighter
+$bg-color-warning = $warning
+$bg-color-lightest = $white
+$bg-color-success = $success
+
+//border colors
+$border-color-primary = $primary
+$border-color-dark = $dark
+$border-color-base = $base
+$border-color-light = $light
+$border-color-lighter = $lighter
+$border-color-warning = $warning
+$border-color-success = $success
+//buttons colors
+$btn-color-base = $base
+$btn-color-lighter = $lighter
+
+
+/**
+ *Broken image style
+ */
+$bIColor = #646464
+$bIBgColor = #e6e6e6
+$bIBorder = 2px dotted #c8c8c8
+$bIBorderR = 5px
+
+/**
+ *Screen sizes
+ */
+$screen-wide-max = 1440px
+$screen-tablet-max = 1023px
+$screen-tablet-mobile-max = 812px
+$screen-mobile-max = 768px
+$screen-mobile-600-max = 600px
+$screen-mobile-480-max = 480px
+$screen-mobile-375-max = 374px
+$screen-mobile-320-max = 320px
+
+/**
+ *Fonts
+ */
+$font-size-black-desktop = 4.2rem
+$font-size-big-desktop = 2.8rem
+$font-size-large-desktop = 1.8rem
+$font-size-medium-desktop = 1.6rem
+$font-size-small-desktop = 1.4rem
+
+//mobile
+$font-size-black-mobile = 4rem
+$font-size-big-mobile = 2.4rem
+$font-size-large-mobile = 1.6rem
+$font-size-medium-mobile = 1.4rem
+
+/**
+ *Line Height
+ */
+$line-height-default = 46 / 42 //1.09
+$line-height-small = 32 / 28 //1.14
+$line-height-regular = 23 / 18 //1.28
+$line-height-medium = 18 / 16 //1.125
+
+/**
+ *Font weights
+ */
+$font-weight-light = 400
+$font-weight-regular = 400
+$font-weight-bold = 400
+
+//radiuses
+$border-radius-default = 20px
+
+media-wide()
+  @media screen and (max-width: $screen-wide-max)
+    {block}  //@stylint ignore
+
+media-tablet()
+  @media screen and (max-width: $screen-tablet-max)
+    {block}  //@stylint ignore
+
+media-tablet-mobile()
+  @media screen and (max-width: $screen-tablet-mobile-max)
+    {block}  //@stylint ignore
+
+media-mobile()
+  @media screen and (max-width: $screen-mobile-max)
+    {block}  //@stylint ignore
+
+media-mobile-600()
+  @media screen and (max-width: $screen-mobile-600-max)
+    {block}  //@stylint ignore
+
+media-mobile-480()
+  @media screen and (max-width: $screen-mobile-480-max)
+    {block}  //@stylint ignore
+
+media-mobile-375()
+  @media screen and (max-width: $screen-mobile-375-max)
+    {block}  //@stylint ignore
+
+media-mobile-320()
+  @media screen and (max-width: $screen-mobile-320-max)
+    {block}  //@stylint ignore
