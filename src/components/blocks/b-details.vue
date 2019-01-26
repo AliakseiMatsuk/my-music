@@ -42,6 +42,9 @@
         return this.detailsData.name ? `https://ui-avatars.com/api/?name=${this.detailsData.artist}&size=300` : "http://placehold.it/300x300";
       }
     },
+    created() {
+      this.updateCommentIfNeed(this.detailsData);
+    },
     methods: {
       onFieldFocus() {
         this.autoSaveTimer = setInterval(() => {
@@ -54,12 +57,15 @@
       },
       emitUpdateDetails() {
         this.$emit('updateDetails', { ...this.detailsData, comment: this.comment });
+      },
+      updateCommentIfNeed(data) {
+        this.comment = !data.comment ? '' : data.comment;
       }
     },
     watch: {
       detailsData: {
         handler(data) {
-          this.comment = !!data.comment ? data.comment : '';
+          this.updateCommentIfNeed(data);
         },
         deep: true
       },
@@ -94,7 +100,7 @@
       &-title
         margin-bottom 10px
       &-field
-        min-height 300px
+        min-height 200px
         width 100%
         border 1px solid $border-color-dark
         padding 20px

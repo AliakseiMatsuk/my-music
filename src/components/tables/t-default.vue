@@ -78,8 +78,8 @@
       padding 10px
     &__body
       .t-default
-      &__row
-        trbg()
-        &:hover
-          background-color #778899
+        &__row
+          trbg()
+          &:hover
+            background-color #778899
 </style>

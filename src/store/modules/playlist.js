@@ -43,10 +43,13 @@ const actions = {
 // mutations
 const mutations = {
   [M_SET_PLAYLIST](state, payload) {
-    state.playlist = payload
+    let savedPlayList = localStorage.getItem('playlist');
+
+    state.playlist = !savedPlayList ? payload : JSON.parse(savedPlayList);
   },
   [M_UPDATE_PLAYLIST_ITEM](state, payload) {
     Vue.set(state.playlist.find((item) => item.name === payload.name), 'comment', payload.comment);
+    localStorage.setItem('playlist', JSON.stringify(state.playlist));
   }
 };
 
