@@ -5,8 +5,8 @@ module.exports = {
     'style-resources-loader': {
       preProcessor: 'stylus',
       patterns: [
-        path.resolve(__dirname, 'src/assets/stylus/settings/variables.styl'),
-        path.resolve(__dirname, 'src/assets/stylus/settings/mixins.styl'),
+        '/Users/matsukaliaksei/Front-devs/my-music/src/assets/stylus/settings/variables.styl',
+        '/Users/matsukaliaksei/Front-devs/my-music/src/assets/stylus/settings/mixins.styl',
       ]
     }
   }
