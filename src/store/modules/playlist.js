@@ -1,13 +1,17 @@
+import Vue from "vue";
+
 import {
   API_PLAYLIST,
 } from "../../helpers/api-call-names"
 
 import {
   A_GET_PLAYLIST,
+  A_UPDATE_PLAYLIST_ITEM
 } from "../../helpers/actions-types"
 
 import {
   M_SET_PLAYLIST,
+  M_UPDATE_PLAYLIST_ITEM
 } from "../../helpers/mutations-types"
 
 import { HTTP } from "../../helpers/http-common"
@@ -29,13 +33,23 @@ const actions = {
       .then(res => {
         commit(M_SET_PLAYLIST, res.data);
       })
+  },
+  [A_UPDATE_PLAYLIST_ITEM]: ({ commit }, payload) => {
+    //post request for update playlist item will be add
+    commit(M_UPDATE_PLAYLIST_ITEM, payload);
   }
 };
 
 // mutations
 const mutations = {
   [M_SET_PLAYLIST](state, payload) {
-    state.playlist = payload
+    let savedPlayList = localStorage.getItem('playlist');
+
+    state.playlist = savedPlayList ? JSON.parse(savedPlayList) : payload;
+  },
+  [M_UPDATE_PLAYLIST_ITEM](state, payload) {
+    Vue.set(state.playlist.find((item) => item.name === payload.name), 'comment', payload.comment);
+    localStorage.setItem('playlist', JSON.stringify(state.playlist));
   }
 };
 
