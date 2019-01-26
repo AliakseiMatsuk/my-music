@@ -1,16 +1,15 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue"
+import Vuex from "vuex"
+
+import playlist from "./modules/playlist"
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-
+  modules: {
+    playlist
   },
-  mutations: {
-
-  },
-  actions: {
-
-  },
-});
+  state: {},
+  mutations: {},
+  actions: {},
+})
