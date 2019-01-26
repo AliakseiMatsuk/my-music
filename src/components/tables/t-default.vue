@@ -7,7 +7,10 @@
         @click="sort(header.field)",
         :key="`header-${index}`") {{ header.title }}
     tbody.t-default__body
-      tr.t-default__row(v-for="(row,index) in sortedDataList", :key="`row-${index}`")
+      tr.t-default__row(
+      v-for="(row,index) in sortedDataList",
+      @click="$emit('showDetails', row)",
+      :key="`row-${index}`")
         td.t-default__cell(v-for="(cell,index) in format", :key="`cell-${index}`") {{row[cell.field]}}
 </template>
 
@@ -62,6 +65,7 @@
     width 100%
     text-align left
     border 1px solid $border-color-dark
+    margin-bottom 20px
     &__row
       cursor pointer
       &:nth-child(odd)
@@ -74,8 +78,8 @@
       padding 10px
     &__body
       .t-default
-        &__row
-          trbg()
-          &:hover
-            background-color #778899
+      &__row
+        trbg()
+        &:hover
+          background-color #778899
 </style>
