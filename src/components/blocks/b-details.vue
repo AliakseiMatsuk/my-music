@@ -1,28 +1,28 @@
 <template lang="pug">
-  .b-details
+  .b-details(:class="{ _visible : isDataUpdating, _hidden : !isDataUpdating}")
     .container
       .b-details__container
         .b-details__info
-          h2._fwbold {{detailsData.artist}}
+          h2.b-details__info-title._fwbold {{currentData.artist}}
           .b-details__cover
             .b-details__cover-inner
               img.b-details__cover-image(
               :src="getImage",
-              :alt="detailsData.name",
+              :alt="currentData.name",
               data-object-fit="cover",
               data-object-position="center")
         .b-details__content
-          h2.b-details__content-title {{detailsData.name}}
+          h2.b-details__content-title {{currentData.name}}
           .b-details__comment
             h4.b-details__comment-title Comment
             textarea.b-details__comment-field(
-            @focus="onFieldFocus",
-            @blur="onFieldBlur",
+            @focus="onCommentFocus",
+            @blur="onCommentBlur",
             v-model.trim="comment",
-            :key="detailsData.name")
-          .b-details__share(v-show="comment")
-            p
-              a.b-details__share-twitter(:href="setTweetShareParams", target="_blank") Tweet
+            :key="currentData.name")
+          .b-details__share(:class="{ _visible : comment, _hidden : !comment}")
+            a.b-details__share-twitter(:href="setTweetShareParams", target="_blank")
+              svg-use(:svg="{name:'twitter'}")
 </template>
 
 <script>
@@ -30,8 +30,10 @@
     name: "bDetails",
     data() {
       return {
-        comment: "",
-        autoSaveTimer: null
+        autoSaveTimer: null,
+        isDataUpdating: false,
+        currentData: null,
+        comment: ""
       }
     },
     props: {
@@ -41,28 +43,29 @@
       }
     },
     created() {
-      this.updateCommentIfNeed(this.detailsData);
+      this.currentData = this.detailsData;
+      this.updateComment(this.currentData);
     },
     methods: {
-      onFieldFocus() {
+      onCommentFocus() {
         this.autoSaveTimer = setInterval(() => {
           this.emitUpdateDetails()
         }, 5000);
       },
-      onFieldBlur() {
+      onCommentBlur() {
         clearInterval(this.autoSaveTimer);
         this.emitUpdateDetails();
       },
       emitUpdateDetails() {
-        this.$emit('updateDetails', { ...this.detailsData, comment: this.comment });
+        this.$emit('updateDetails', { ...this.currentData, comment: this.comment });
       },
-      updateCommentIfNeed(data) {
-        this.comment = !data.comment ? '' : data.comment;
+      updateComment(data) {
+        this.comment = data.comment || '';
       }
     },
     computed: {
       getImage() {
-        return this.detailsData.name ? `https://ui-avatars.com/api/?name=${this.detailsData.artist}&size=300` : "http://placehold.it/300x300";
+        return this.currentData.artist ? `https://ui-avatars.com/api/?name=${this.currentData.artist}&size=300` : "http://placehold.it/300x300";
       },
       setTweetShareParams() {
         return `https://twitter.com/intent/tweet?text=${this.comment.replace(/ /g, '%20')}`;
@@ -70,8 +73,15 @@
     },
     watch: {
       detailsData: {
-        handler(data) {
-          this.updateCommentIfNeed(data);
+        handler(newData, oldData) {
+          if (newData !== oldData) {
+            this.isDataUpdating = true;
+            setTimeout(() => {
+              this.currentData = this.detailsData;
+              this.updateComment(newData);
+              this.isDataUpdating = false;
+            }, 250)
+          }
         },
         deep: true
       }
@@ -83,11 +93,34 @@
   .b-details
     border 1px solid $border-color-dark
     padding 20px
+    position relative
+    background-color #cecece
+    &._visible
+      &:before
+        visibility visible
+        opacity 1
+        transition opacity .25s
+    &._hidden
+      &:before
+        visibility hidden
+        opacity 0
+        transition visibility 0s .25s, opacity .25s linear
+    &:before
+      content ''
+      position absolute
+      top 0
+      right 0
+      bottom 0
+      left 0
+      background-color #cecece
+      z-index 1
     &__container
       display flex
     &__info
-      fw(300px)
+      fw(500px)
       margin-right 50px
+      &-title
+        margin-bottom 20px
     &__cover
       &-inner
         position relative
@@ -109,8 +142,24 @@
         min-height 200px
         width 100%
         border 1px solid $border-color-dark
+        background-color $bg-color-light
         padding 20px
         font-size $font-size-large-desktop
     &__share
+      display inline-block
+      visibility hidden
+      opacity 0
       margin-top 20px
+      tro(.5s)
+      &._visible
+        visibility visible
+        opacity 1
+        tro(.3s)
+      &._hidden
+        visibility hidden
+        opacity 0
+        transition visibility 0s .3s, opacity .3s ease-in-out
+      .svg-twitter
+        width 40px
+        height 40px
 </style>

@@ -1,13 +1,18 @@
 <template lang="pug">
   s-default(:title="'My Music'")
-    t-default(
-    :format="playListFormat",
-    :dataList="GET_PLAYLIST",
-    @showDetails="showDetails")
-    b-details(
-    v-if="details",
-    :detailsData="details",
-    @updateDetails="updateDetails")
+    transition(name="fade-modal", mode='out-in', appear)
+      .p-home__playlist(v-if="GET_PLAYLIST.length", key="playlist")
+        t-default(
+        :format="playListFormat",
+        :dataList="GET_PLAYLIST",
+        @showDetails="showDetails")
+        transition(name="fade-modal", appear)
+          b-details(
+          v-if="details",
+          :detailsData="details",
+          @updateDetails="updateDetails")
+      .p-home__loader(v-else, key="loader")
+        b-loading
 
 
 </template>
