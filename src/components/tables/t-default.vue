@@ -5,7 +5,9 @@
         th.t-default__cell(
         v-for="(header,index) in format",
         @click="sort(header.field)",
-        :key="`header-${index}`") {{ header.title }}
+        :class="sortedColumnClassName(header)",
+        :key="`header-${index}`")
+          .t-default__cell-value {{ header.title }}
     tbody.t-default__body
       tr.t-default__row(
       v-for="(row,index) in sortedDataList",
@@ -35,7 +37,7 @@
     },
     created() {
       // set sort order by first column
-      this.currentSort = this.format[1].field;
+      this.currentSort = this.format[0].field;
     },
     methods: {
       sort(s) {
@@ -44,6 +46,11 @@
           this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' : 'asc';
         }
         this.currentSort = s;
+      },
+      sortedColumnClassName(header) {
+        return {
+          ['_active ' + '_' + this.currentSortDir]: header.field === this.currentSort,
+        }
       }
     },
     computed: {
@@ -76,6 +83,25 @@
         background-color #808080
     &__cell
       padding 10px
+      &._active
+        .t-default
+          &__cell-value
+            font-weight bold
+            display inline-flex
+            align-items center
+            &:after
+              margin-left 10px
+              content ''
+              width 0
+              height 0
+              border-style solid
+              border-width 5px 5px 0 5px
+              border-color $bg-color-base transparent transparent transparent
+      &._asc
+        .t-default
+          &__cell-value
+            &:after
+              transform rotate(180deg)
     &__body
       .t-default
         &__row
