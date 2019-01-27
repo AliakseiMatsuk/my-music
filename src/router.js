@@ -7,9 +7,10 @@ Vue.use(Router);
 
 export default new Router({
   mode: "history",
+  base: '/my-music/',
   routes: [
     {
-      path: "/",
+      path: "",
       name: "home",
       component: Home
     },
