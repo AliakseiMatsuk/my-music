@@ -1,6 +1,7 @@
 <template lang="pug">
   #app.wrapper
-    router-view(key="router-view")
+    transition(name="fade", mode="out-in")
+      router-view
 </template>
 
 
@@ -11,4 +12,5 @@
   @import 'assets/stylus/settings/mixins'
   @import 'assets/stylus/settings/default'
   @import 'assets/stylus/settings/animations'
+  @import '~c3/c3.css'
 </style>

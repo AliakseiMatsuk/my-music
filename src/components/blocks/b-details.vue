@@ -20,7 +20,7 @@
             @blur="onCommentBlur",
             v-model.trim="comment",
             :key="currentData.name")
-          .b-details__share(:class="{ _visible : comment, _hidden : !comment}")
+          .b-details__share(:class="{ _show : comment}")
             a.b-details__share-twitter(:href="setTweetShareParams", target="_blank")
               svg-use(:svg="{name:'twitter'}")
 </template>
@@ -147,18 +147,13 @@
         font-size $font-size-large-desktop
     &__share
       display inline-block
+      margin-top 20px
       visibility hidden
       opacity 0
-      margin-top 20px
       tro(.5s)
-      &._visible
+      &._show
         visibility visible
         opacity 1
-        tro(.3s)
-      &._hidden
-        visibility hidden
-        opacity 0
-        transition visibility 0s .3s, opacity .3s ease-in-out
       .svg-twitter
         width 40px
         height 40px

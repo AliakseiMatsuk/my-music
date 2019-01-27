@@ -23,7 +23,34 @@ const state = {
 
 // getters
 const getters = {
-  GET_PLAYLIST: state => state.playlist
+  GET_PLAYLIST: state => state.playlist,
+  GET_PLAYLIST_STATISTIC: (state) => {
+    let playlistStatistic = [{
+      title: 'Genre',
+      key: 'genre',
+      values: {},
+      chartValues: []
+    }, {
+      title: 'Stars',
+      key: 'stars',
+      values: {},
+      chartValues: []
+    }];
+
+    playlistStatistic.forEach((obj) => {
+      state.playlist.forEach((curr) => {
+        (curr[obj.key] in obj.values) ? obj.values[curr[obj.key]]++ : obj.values[curr[obj.key]] = 1;
+      });
+    });
+
+    playlistStatistic.forEach((obj) => {
+      for (let key in obj.values) {
+        obj.chartValues.push([key, obj.values[key]]);
+      }
+    });
+
+    return playlistStatistic;
+  }
 };
 
 // actions
