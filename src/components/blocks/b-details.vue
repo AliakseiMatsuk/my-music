@@ -20,7 +20,7 @@
             @blur="onCommentBlur",
             v-model.trim="comment",
             :key="currentData.name")
-          .b-details__share(:class="{ _show : comment }")
+          .b-details__share(:class="{ _visible : comment, _hidden : !comment}")
             a.b-details__share-twitter(:href="setTweetShareParams", target="_blank")
               svg-use(:svg="{name:'twitter'}")
 </template>
@@ -65,7 +65,7 @@
     },
     computed: {
       getImage() {
-        return this.currentData.name ? `https://ui-avatars.com/api/?name=${this.currentData.artist}&size=300` : "http://placehold.it/300x300";
+        return this.currentData.artist ? `https://ui-avatars.com/api/?name=${this.currentData.artist}&size=300` : "http://placehold.it/300x300";
       },
       setTweetShareParams() {
         return `https://twitter.com/intent/tweet?text=${this.comment.replace(/ /g, '%20')}`;
@@ -151,9 +151,14 @@
       opacity 0
       margin-top 20px
       tro(.5s)
-      &._show
+      &._visible
         visibility visible
         opacity 1
+        tro(.3s)
+      &._hidden
+        visibility hidden
+        opacity 0
+        transition visibility 0s .3s, opacity .3s ease-in-out
       .svg-twitter
         width 40px
         height 40px
