@@ -1,6 +1,6 @@
 # my-music
 ## Follow link to check result
-https://github.com/AliakseiMatsuk/my-music/deployments
+https://aliakseimatsuk.github.io/my-music/
 
 ## Project setup
 ```
