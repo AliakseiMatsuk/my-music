@@ -1,6 +1,5 @@
-# my-music
-## Follow link to check result
-https://aliakseimatsuk.github.io/my-music/
+## Task https://github.com/AliakseiMatsuk/my-music/blob/master/task.pdf 
+## Result https://aliakseimatsuk.github.io/my-music/
 
 ## Project setup
 ```
