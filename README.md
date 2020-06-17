@@ -1,4 +1,6 @@
 # my-music
+## Follow link to check result
+https://github.com/AliakseiMatsuk/my-music/deployments
 
 ## Project setup
 ```
